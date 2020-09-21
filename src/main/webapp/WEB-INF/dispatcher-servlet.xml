@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">indexController</prop>
+                <prop key="login.htm">userController</prop>
+                <prop key="loginUser.htm">userController</prop>
+                <prop key="loginRegister.htm">userController</prop>
+                <prop key="registerNewUser.htm">userController</prop>
+                <prop key="logout.htm">userActivityController</prop>
+                <prop key="manageFlights.htm">adminController</prop>
+                <prop key="manageHotels.htm">adminController</prop>
+                <prop key="addFlights.htm">adminController</prop>
+                <prop key="removeFlights.htm">adminController</prop>
+                <prop key="removeFlightsDetails.htm">adminController</prop>
+                <prop key="viewFlights.htm">adminController</prop>
+                <prop key="addFlightsDetails.htm">adminController</prop>
+                <prop key="updateFlightsDetails.htm">adminController</prop>
+                <prop key="updateFlights.htm">adminController</prop>
+                <prop key="loginusersuccess.htm">userActivityController</prop>
+                <prop key="viewcart.htm">userActivityController</prop>
+                <prop key="flights.htm">userActivityController</prop>
+                <prop key="viewflightuser.htm">userActivityController</prop>
+                <prop key="bookflight.htm">userActivityController</prop>
+                <prop key="confirmpaymentflight.htm">userActivityController</prop>
+                <prop key="viewcart.htm">userActivityController</prop>
+                <prop key="bookroundflight.htm">userActivityController</prop>
+                <prop key="confirmrpaymentflight.htm">userActivityController</prop>
+                <prop key="adminpanel.htm">adminController</prop>
+                <prop key="removefromcart.htm">userActivityController</prop>
+                
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+    <!--
+    The index controller.
+    -->
+    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />
+    
+    <bean name="userController" class="com.travelopia.controller.UserController"/>
+    <bean name="adminController" class="com.travelopia.controller.AdminController"/>
+    <bean name="userActivityController" class="com.travelopia.controller.UserActivityController"/>
+</beans>
